@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { Card } from '../card/Card';
+import { CardList } from '../cardList/CardList';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         </div>
       </header>
       <main className='container'>
-        <Card/>
+        <CardList/>
       </main>
       <footer className='container'>
         footer
