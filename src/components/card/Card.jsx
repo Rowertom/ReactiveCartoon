@@ -3,16 +3,15 @@ import { ReactComponent as Like } from './like.svg';
 
 import './style.css';
 
-export const Card = () => {
+export const Card = ({date, image, title, text, author }) => {
   return (
     <div className='card'>
       <div className='card__header'>
           <div className='card__author__ava'>
-          <ImageAvatar/>
+          <ImageAvatar authorSrc={author.avatar}/>
           </div>
           <div className='card__author__data'>
-                <h3 className='author__name'>Bender</h3>
-                <p className='author__date'>11.02.2023</p>
+                <h3 className='author__name'>{author.name}</h3>
           </div>
         <button className='card__favorite'>
           <Like className='card__liked' />
@@ -20,7 +19,7 @@ export const Card = () => {
       </div>
       <div className='card__data'>
         <div>
-        <img src="https://cs10.pikabu.ru/post_img/big/2019/08/28/11/1567017193122712086.jpg" alt='card__image' className='card__image' />
+        <img src={image} alt='card__image' className='card__image' />
         </div>
         <div className='card__data__tag'>
             <span className='card__data__tag__span'>legendary</span>
@@ -28,12 +27,13 @@ export const Card = () => {
         </div>
       </div>
         <div className='card__desc'>
-          <h2 className='card__title'>Бендер Сгибальщик Родригес</h2>
-          <p className='card__text'>Комический антигерой, сквернослов, алкоголик, заядлый курильщик сигар, почитатель порнографии для роботов (в виде электрических схем), клептоман, повар (его еда в большинстве случаев по меньшей мере несъедобна, часто опасна для жизни). В критической ситуации зачастую единственный, кто впадает в панику.</p>
+          <h2 className='card__title'>{title}</h2>
+          <p className='card__text'>{text}</p>
         </div>
         <div className='card__links'>
           <a href='/' className='btn btn__type__primary'>Читать подробнее</a>
           <a href='/' className='btn btn__type__comment'>Коментировать</a>
+          <p className='author__date'>{date}</p>
         </div>
     </div >
   );
