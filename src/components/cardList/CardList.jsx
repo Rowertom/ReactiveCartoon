@@ -5,7 +5,7 @@ import CardPagination from './pagination/Pagination';
 import { useState } from 'react';
 
 
-export const CardList = () => {
+export const CardList = ({cards}) => {
 
     let now = dayjs();
     const [data, setData] = useState([]);
@@ -21,16 +21,8 @@ export const CardList = () => {
                 })}
             </div>
             <div className='pagination'>
-            <CardPagination setData={(dat) => setData(dat)}/>
+            <CardPagination cards={cards} setData={(dat) => setData(dat)}/>
             </div>
         </div>
     );
 };
-
-// export const CardList = () => {
-//     return (
-//         <div className='cards'>
-//         <Card/>
-//         </div>
-//     );
-// };

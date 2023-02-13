@@ -48,3 +48,10 @@
     transform: rotate(360deg);
   }
 }
+
+.countPosts {
+  color: whitesmoke;
+  background-color: rgba(21, 32, 236, 0.4);
+  border-radius: 10px;
+  
+}
