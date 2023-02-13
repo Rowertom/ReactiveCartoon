@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Cards } from '../Cards/Cards';
+// import { Cards } from '../Cards/Cards';
 import Data from '../../Data/Data.json'
 import './style.css';
 import {Header} from '../Header/Header';
@@ -24,7 +24,7 @@ setCards(newState)
       <Header setSarch={setSarch}/>
       <main className='content contain'>
   {statSarch && <p>По запросу {statSarch} найдено {cards.length} товаров</p>}
-<Cards cards={cards} />
+
 </main>
 <Footer/>
     </div>

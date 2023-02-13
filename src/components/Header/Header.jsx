@@ -42,7 +42,9 @@ export function Header ({setSarch}) {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth="xl"
+                
+      >
         <Toolbar disableGutters>
         <Logo/>
           <Typography
@@ -55,15 +57,15 @@ export function Header ({setSarch}) {
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
+              letterSpacing: '.1rem',
+              color: 'red',
               textDecoration: 'none',
             }}
           >
-            "REACTIVE CARTOONS" 
+            REACTIVE CARTOONS 
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -73,7 +75,7 @@ export function Header ({setSarch}) {
               color="inherit"
             >
             </IconButton>
-            <Menu
+            {/* <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
@@ -96,9 +98,9 @@ export function Header ({setSarch}) {
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
-            </Menu>
-          </Box>
-          <Typography
+            </Menu> */}
+          {/* </Box> */} 
+          {/* <Typography
             variant="h5"
             noWrap
             component="a"
@@ -115,7 +117,7 @@ export function Header ({setSarch}) {
             }}
           >
             LOGO
-          </Typography>
+          </Typography> */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -131,7 +133,7 @@ export function Header ({setSarch}) {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src="" />
               </IconButton>
             </Tooltip>
             <Menu
