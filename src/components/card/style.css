@@ -1,0 +1,120 @@
+.card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10px;
+	border: solid;
+	border-color: rgb(154, 202, 245);
+	border-radius: 10px;
+	background: rgba(21, 32, 236, 0.4);
+}
+
+.card:hover {
+	box-shadow: 10px 5px 5px rgba(230, 15, 15, 0.3), 10px 8px 16px rgba(233, 9, 46, 0.4);
+}
+
+.card:focus-within {
+	box-shadow: 10px 5px 5px rgba(230, 15, 15, 0.3), 10px 8px 16px rgba(233, 9, 46, 0.4);
+}
+
+.card__header {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
+}
+
+.author__name {
+	color: aqua;
+}
+
+.author__date {
+	color: bisque;
+}
+
+.card__data__tag {
+	display: flex;
+	gap: 10px;
+	padding-bottom: 10px;
+}
+
+.card__data__tag__span {
+	background: #c43a17;
+	color: wheat;
+}
+
+.card__image {
+	width: 100%;
+	object-fit: contain;
+	margin-bottom: 16px;
+	height: 200px;
+}
+
+.card__desc {
+	height: 200px;
+	font-size: 16px;
+	padding-top: 14px;
+	font-weight: 600;
+	position: relative;
+	background-color: rgba(21, 32, 236, 0.2);
+	color: whitesmoke;
+	overflow: hidden;
+}
+.card__title {
+	font-size: 26px;
+	color: #f1f50a;
+	
+}
+
+.card__favorite {
+	cursor: pointer;
+	background: none;
+	border: none;
+	padding: 0;
+	display: flex;
+}
+
+.card__links {
+	text-decoration: none;
+	color: currentColor;
+}
+
+.btn {
+	padding: 10px 18px;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 20px;
+	border-radius: 55px;
+	text-decoration: none;
+	display: inline-block;
+	transition: background-color .3s;
+}
+
+.btn__type__primary {
+	background-color: #adaef3;
+}
+
+.btn__type__primary:hover {
+	background-color: #FFAA0D;
+	color: #F44336;
+}
+
+.btn__type__comment {
+	background-color: #f3edca;
+}
+
+.btn__type__comment:hover {
+	background-color: #FFAA0D;
+	color: #F44336;
+}
+
+
+svg {
+	fill: rgb(240, 180, 180, 0.6);
+}
+
+.card__liked>svg {
+	fill: red;
+}
