@@ -3,6 +3,17 @@
   min-width: 30%;
   pointer-events: none;
   border-color: black;
+  margin-right: 10px;
+}
+
+.logo_text {
+  display: flex;
+  font-weight: 700;
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+  letter-spacing: .1rem;
+  align-items: center;
 }
 
 @media (prefers-reduced-motion: no-preference) {
