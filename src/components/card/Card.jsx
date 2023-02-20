@@ -1,40 +1,57 @@
 import ImageAvatar from './avatar/Avatar';
 import { ReactComponent as Like } from './like.svg';
+import CommentIcon from '@mui/icons-material/Comment';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 import './style.css';
 
-export const Card = ({date, image, title, text, author }) => {
+export const Card = ({ date, image, title, text, author, posts, currentUser, handlePostLike, deleteOwnPost }) => {
+
+  const isLiked = posts.likes.some((e) => e === currentUser._id);
+  function handleLikeClick() {
+    handlePostLike(posts);
+  }
+  function handleDeleteClick() {
+    deleteOwnPost(posts);
+  }
+
   return (
     <div className='card'>
       <div className='card__header'>
-          <div className='card__author__ava'>
-          <ImageAvatar authorSrc={author.avatar}/>
-          </div>
-          <div className='card__author__data'>
-                <h3 className='author__name'>{author.name}</h3>
-          </div>
-        <button className='card__favorite'>
+        <div className='card__author__ava'>
+          <ImageAvatar authorSrc={author.avatar} />
+        </div>
+        <div className='card__author__data'>
+          <h3 className='author__name'>{author.name}</h3>
+        </div>
+        <button className={`card__favorite ${isLiked ? 'card__liked' : ''}`} onClick={handleLikeClick}>
           <Like className='card__liked' />
-          </button>
+          <span className='count__likes'>{posts.likes.length}</span>
+        </button>
       </div>
       <div className='card__data'>
         <div>
-        <img src={image} alt='card__image' className='card__image' />
+          <img src={image} alt='card__image' className='card__image' />
         </div>
         <div className='card__data__tag'>
-            <span className='card__data__tag__span'>legendary</span>
-            <span className='card__data__tag__span'>legendary</span>
+          <span className='card__data__tag__span'>legendary</span>
+          <span className='card__data__tag__span'>legendary</span>
         </div>
       </div>
-        <div className='card__desc'>
-          <h2 className='card__title'>{title}</h2>
-          <p className='card__text'>{text}</p>
+      <div className='card__desc'>
+        <h2 className='card__title'>{title}</h2>
+        <p className='card__text'>{text}</p>
+      </div>
+      <div className='card__links'>
+        <div>
+        <a href='/' className='btn btn__type__primary'>Читать подробнее</a>
+        <p className='author__date'>{date}</p>
         </div>
-        <div className='card__links'>
-          <a href='/' className='btn btn__type__primary'>Читать подробнее</a>
-          <a href='/' className='btn btn__type__comment'>Коментировать</a>
-          <p className='author__date'>{date}</p>
+        <div>
+        <a href='/' className='btn btn__type__comment'><CommentIcon/></a>
+        <button className='btn btn__type__delete' onClick={handleDeleteClick}><DeleteForeverIcon/></button>
         </div>
+      </div>
     </div >
   );
 };
