@@ -76,7 +76,16 @@
 	display: flex;
 }
 
+.count__likes {
+	position: absolute;
+	color: bisque;
+	top: 20px;
+	right: 15px;
+	font-size: 12px;
+}
+
 .card__links {
+	display: block;
 	text-decoration: none;
 	color: currentColor;
 }
@@ -102,7 +111,8 @@
 }
 
 .btn__type__comment {
-	background-color: #f3edca;
+	background-color: #adaef3;
+	color:#f3edca;
 }
 
 .btn__type__comment:hover {
@@ -110,6 +120,15 @@
 	color: #F44336;
 }
 
+.btn__type__delete {
+	background-color: #adaef3;
+	border: none;
+	color:#F44336;
+}
+
+.btn__type__delete:hover {
+	background-color: #FFAA0D;
+}
 
 svg {
 	fill: rgb(240, 180, 180, 0.6);
