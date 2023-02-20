@@ -28,3 +28,31 @@
 // POST https://api.react-learning.ru/signin // авторизация
 // POST https://api.react-learning.ru/password-reset // сброс пароля на почту
 // POST https://api.react-learning.ru/password-reset/:userId/:token // смена пароля после подтвержения токеном
+
+const config = {
+    baseUrl: 'https://api.react-learning.ru',
+    headers: {
+      'content-type': 'application/json',
+      Authorization:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2VlNjI4NTNhYTI4NTAzNGY3OGFiMTgiLCJncm91cCI6Imdyb3VwLTEwIiwiaWF0IjoxNjc2NTY3MzIxLCJleHAiOjE3MDgxMDMzMjF9.Ll4fQjRpEicfUonoM9L5V4AXjGYy__TvqDThnREHPuY',
+    },
+  };
+  
+  const onResponse = (res) => {
+  return res.ok ? res.json() : Promise.reject('Ошибка');
+  };
+  
+  class Api {
+    constructor({baseUrl, headers}) {
+      this._baseUrl = baseUrl;
+      this._headers = headers;
+    }
+
+    getUsersInfo() {
+        return fetch(`${this._baseUrl}/users/me`, {
+            headers: this._headers,
+          }).then(onResponse);
+    }
+}
+
+export const api = new Api(config);
