@@ -1,5 +1,4 @@
 
-//import avatarSrc from './avatar.jpg'
 import './style.css';
 
 

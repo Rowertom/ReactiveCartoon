@@ -1,4 +1,4 @@
-import logoSrc from './logo.png';
+import logoSrc from '../../assets/icons/logo.png';
 import './style.css';
 
 

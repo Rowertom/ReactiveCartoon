@@ -1,5 +1,5 @@
 import ImageAvatar from './avatar/Avatar';
-import { ReactComponent as Like } from './like.svg';
+import { ReactComponent as Like } from '../../assets/icons/like.svg';
 import CommentIcon from '@mui/icons-material/Comment';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
