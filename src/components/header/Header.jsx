@@ -10,20 +10,21 @@ import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
-export const Header =({setSarch, user})=> {
+export const Header = () => {
+
     const handleAddContent = () => {
         console.log('Есть контакт')
-      };
+    };
 
-      const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
-      const handleMenu = (event) => {
+    const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
-      };
-    
-      const handleClose = () => {
+    };
+
+    const handleClose = () => {
         setAnchorEl(null);
-      };
+    };
 
     return (
         <div className='header'>
@@ -31,18 +32,18 @@ export const Header =({setSarch, user})=> {
                 <div className='header__wrap'>
                     <div className='header__left'>
                         <Logo />
-                        <Search setSarch={setSarch} />
+                        <Search />
                         <button className='btn_header' onClick={handleAddContent}>СОЗДАТЬ ПОСТ</button>
-                    </div>  
+                    </div>
                     <div className='header__rait'>
-                        <User user={user} />
+                        <User />
                         <Box sx={{ flexGrow: 1 }}>
                             <div>
                                 <IconButton className='ava'
                                     alt='аватар'
                                     onClick={handleMenu}
                                 >
-                                    <Avatar user={user} />
+                                    <Avatar />
                                 </IconButton>
 
                                 <Menu
@@ -58,7 +59,8 @@ export const Header =({setSarch, user})=> {
                             </div>
                         </Box>
                     </div>
+                </div>
             </div>
-            </div> 
-    </div>);
+        </div>
+    );
 }

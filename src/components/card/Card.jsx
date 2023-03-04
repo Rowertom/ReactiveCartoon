@@ -4,8 +4,14 @@ import CommentIcon from '@mui/icons-material/Comment';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 import './style.css';
+import { useContext } from 'react';
+import { CardContext } from '../../context/CardContext';
+import { UserContext } from '../../context/UserContext';
 
-export const Card = ({ date, image, title, text, author, posts, currentUser, handlePostLike, deleteOwnPost }) => {
+export const Card = ({ date, image, title, text, author, posts }) => {
+
+  const {handlePostLike, deleteOwnPost} = useContext(CardContext);
+  const {currentUser} = useContext(UserContext);
 
   const isLiked = posts.likes.some((e) => e === currentUser._id);
   function handleLikeClick() {

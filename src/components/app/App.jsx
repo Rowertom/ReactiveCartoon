@@ -1,10 +1,13 @@
 import './App.css';
-import { CardList } from '../cardList/CardList';
 import { Footer } from '../footer/Footer';
 import React, { useEffect, useState } from 'react';
 import { Header } from '../header/Header';
 import { api } from '../../utils/Api';
-import { cast, useDebounce } from '../../utils/utils';
+import { useDebounce } from '../../utils/utils';
+import { UserContext } from '../../context/UserContext'
+import { CardContext } from '../../context/CardContext'
+import { Route, Routes } from 'react-router-dom';
+import { CatalogPage } from '../../pages/catalogPage/CatalogPage';
 
 
 function App() {
@@ -56,18 +59,27 @@ function App() {
     })
   }, []);
 
+  const contextCardValue = { cards, handlePostLike, deleteOwnPost };
+  const contextUserValue = { currentUser, setSarch };
+
   return (
     <>
-      <header className='container'>
-        <Header setSarch={setSarch} user={currentUser} />
-      </header>
-      <main className='container'>
-        {statSarch && <p className='countPosts'>По запросу {statSarch} найдено {cast(cards.length)} </p>}
-        <CardList cards={cards} currentUser={currentUser} handlePostLike={handlePostLike} deleteOwnPost={deleteOwnPost} />
-      </main>
-      <footer className='container'>
-        <Footer />
-      </footer>
+      <UserContext.Provider value={contextUserValue}>
+        <CardContext.Provider value={contextCardValue}>
+          <header className='container'>
+            <Header />
+          </header>
+          <main className='container'>
+            <Routes>
+              <Route path='/' element={<CatalogPage/>}></Route>
+              
+            </Routes>
+          </main>
+          <footer className='container'>
+            <Footer />
+          </footer>
+        </CardContext.Provider>
+      </UserContext.Provider>
     </>
   );
 }

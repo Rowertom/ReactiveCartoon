@@ -1,13 +1,16 @@
 import './style.css'
 import { Card } from '../card/Card';
 import dayjs from 'dayjs/';
+import { useContext } from 'react';
+import { CardContext } from '../../context/CardContext';
 // import CardPagination from './pagination/Pagination';
 // import { useState } from 'react';
 
 
-export const CardList = ({cards, currentUser, handlePostLike, deleteOwnPost}) => {
+export const CardList = () => {
 
     // const [data, setData] = useState([]);
+    const {cards} = useContext(CardContext);
 
     return (
         <div>
@@ -20,9 +23,6 @@ export const CardList = ({cards, currentUser, handlePostLike, deleteOwnPost}) =>
                         posts={item}
                         key={item._id}
                         date={dayjs(item.created_at).format("DD.MM.YYYY")}
-                        currentUser={currentUser}
-                        handlePostLike={handlePostLike}
-                        deleteOwnPost={deleteOwnPost}
                         />;
                     }
                 })}
