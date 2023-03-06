@@ -52,7 +52,9 @@ export const Card = ({ date, image, title, text, author, posts }) => {
       </div>
       <div className='card__links'>
         <div>
-        <Link to={`/post/${posts._id}`} className='btn btn__type__primary'>Читать подробнее</Link>
+        <button  className='btn btn__type__primary'>
+          <Link to={`/post/${posts._id}`} className='link'>Читать подробнее</Link>
+          </button>
         <p className='author__date'>{date}</p>
         </div>
         <div>
