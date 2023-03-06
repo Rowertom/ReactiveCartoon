@@ -1,0 +1,169 @@
+.post_card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10px;
+	border: solid;
+	border-color: rgb(154, 202, 245);
+	border-radius: 10px;
+	background: rgba(21, 32, 236, 0.4);
+}
+
+.post__header {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.post__title {
+	font-size: 26px;
+	color: #f1f50a;
+	
+}
+
+.post_btn {
+	padding: 10px 18px;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 20px;
+	border-radius: 55px;
+	text-decoration: none;
+	display: inline-block;
+	transition: background-color .3s;
+	
+}
+
+.btn__type__primary {
+	background-color: #adaef3;
+}
+
+.btn__type__primary:hover {
+	background-color: #FFAA0D;
+	color: #F44336;
+}
+
+
+.post_imgWrapper{
+		flex: 1;
+}
+
+.post__image {
+	max-width: 488px;  
+	object-fit: contain;
+	margin-bottom: 16px;
+}
+
+
+.post__desc {
+
+	font-size: 16px;
+	padding-top: 14px;
+	font-weight: 600;
+	position: relative;
+	background-color: rgba(21, 32, 236, 0.2);
+	color: whitesmoke;
+	display: flex;
+	gap: 60px;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.post__text {
+	font-size: 16px;
+	padding-top: 14px;
+	font-weight: 600;
+	background-color: rgba(21, 32, 236, 0.2);
+	color: whitesmoke;
+	margin-bottom: 40px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.post__favorite {
+	cursor: pointer;
+	background: none;
+	border: none;
+	padding: 0;
+	display: flex;
+}
+
+.post__data__tag {
+	display: flex;
+	gap: 10px;
+	padding-bottom: 10px;
+}
+
+.post__data__tag__span {
+	background: #c43a17;
+	color: wheat;
+}
+
+
+
+
+
+
+
+.post_card:hover {
+	box-shadow: 10px 5px 5px rgba(230, 15, 15, 0.3), 10px 8px 16px rgba(233, 9, 46, 0.4);
+}
+
+.post_card:focus-within {
+	box-shadow: 10px 5px 5px rgba(230, 15, 15, 0.3), 10px 8px 16px rgba(233, 9, 46, 0.4);
+}
+
+.post_author__name {
+	color: aqua;
+}
+
+.post_author__date {
+	color: bisque;
+}
+
+.post__data__tag {
+	display: flex;
+	gap: 10px;
+	padding-bottom: 10px;
+}
+
+.post__data__tag__span {
+	background: #c43a17;
+	color: wheat;
+}
+
+
+
+.post__likes {
+	position: absolute;
+	color: bisque;
+	top: 20px;
+	right: 15px;
+	font-size: 12px;
+}
+
+
+
+
+
+
+.btn__type__comment {
+	background-color: #adaef3;
+	color:#f3edca;
+}
+
+.btn__type__comment:hover {
+	background-color: #FFAA0D;
+	color: #F44336;
+}
+
+
+svg {
+	fill: rgb(240, 180, 180, 0.6);
+}
+
+.card__liked>svg {
+	fill: red;
+}

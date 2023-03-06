@@ -23,6 +23,13 @@ class Api {
         }).then(onResponse);
     }
 
+    getPostsById(id) {
+        return fetch(`${this._baseUrl}/posts/${id}`, {
+            headers: this._headers,
+            method: 'GET',
+        }).then(onResponse);
+    }
+
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
             headers: this._headers,

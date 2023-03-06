@@ -8,6 +8,7 @@ import { UserContext } from '../../context/UserContext'
 import { CardContext } from '../../context/CardContext'
 import { Route, Routes } from 'react-router-dom';
 import { CatalogPage } from '../../pages/catalogPage/CatalogPage';
+import { PostPage } from '../../pages/postPage/PostPage';
 
 
 function App() {
@@ -69,11 +70,11 @@ function App() {
           <header className='container'>
             <Header />
           </header>
-          <main className='container'>
+          <main className='container'>  
             <Routes>
               <Route path='/' element={<CatalogPage/>}></Route>
-              
-            </Routes>
+              <Route path='/post/:postId' element={<PostPage/>}></Route>
+          </Routes>
           </main>
           <footer className='container'>
             <Footer />
