@@ -26,3 +26,14 @@ export const useDebounce = (searchQuery, delay = 500) => {
     }, [searchQuery]);
     return debounceValue;
   };
+
+  export const sortCards = (cards, type) => {
+  switch (type) {
+    case 'Популярные':
+      return cards.sort((a, b) => b.likes.length - a.likes.length);
+    case 'Новинки':
+      return cards.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    default: return cards;
+
+  }
+}
