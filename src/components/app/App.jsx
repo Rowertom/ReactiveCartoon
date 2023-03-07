@@ -8,6 +8,7 @@ import { UserContext } from '../../context/UserContext'
 import { CardContext } from '../../context/CardContext'
 import { Route, Routes } from 'react-router-dom';
 import { CatalogPage } from '../../pages/catalogPage/CatalogPage';
+import { PostPage } from '../../pages/postPage/PostPage';
 import { Page404 } from '../../pages/page404/Page404';
 
 
@@ -74,11 +75,12 @@ function App() {
           <header className='container'>
             <Header />
           </header>
-          <main className='container'>
+          <main className='container'>  
             <Routes>
-              <Route path='/' element={<CatalogPage />}></Route>
+              <Route path='/' element={<CatalogPage/>}></Route>
+              <Route path='/post/:postId' element={<PostPage/>}></Route>
               <Route path='*' element={<Page404 />}></Route>
-            </Routes>
+          </Routes>
           </main>
           <footer className='container'>
             <Footer />

@@ -137,3 +137,7 @@ svg {
 .card__liked>svg {
 	fill: red;
 }
+
+.link{
+	text-decoration: none;
+}

@@ -7,6 +7,8 @@ import './style.css';
 import { useContext } from 'react';
 import { CardContext } from '../../context/CardContext';
 import { UserContext } from '../../context/UserContext';
+import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 
 export const Card = ({ date, image, title, text, author, posts }) => {
 
@@ -50,7 +52,9 @@ export const Card = ({ date, image, title, text, author, posts }) => {
       </div>
       <div className='card__links'>
         <div>
-        <a href='/' className='btn btn__type__primary'>Читать подробнее</a>
+        <button  className='btn btn__type__primary'>
+          <Link to={`/post/${posts._id}`} className='link'>Читать подробнее</Link>
+          </button>
         <p className='author__date'>{date}</p>
         </div>
         <div>
