@@ -1,10 +1,11 @@
 
 import './style.css';
 import { ReactComponent as Like } from '../../assets/icons/like.svg';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { api } from '../../utils/Api';
 import dayjs from 'dayjs/';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
 
 
 
@@ -16,6 +17,8 @@ export const Post = ({ id }) => {
   }, [id])
 
 const navigate= useNavigate();
+const {currentUser} = useContext(UserContext);
+const isLiked = post?.likes?.some((e) => e === currentUser._id);
 
   return (
     <>
@@ -36,8 +39,9 @@ const navigate= useNavigate();
             <div className='post_author__name'><h3>{post?.author?.name}</h3></div>
             </div>
             <div>{dayjs(post.created_at).format("DD.MM.YYYY")}
+
             <div>
-            <button className='post__favorite'>
+            <button className={`post__favorite ${isLiked ? 'post__liked' : ''}`}>
                 <Like />
               {post?.likes?.length !== 0 && <span className='post__likes'>{post?.likes?.length}</span>}
               </button>

@@ -170,8 +170,8 @@
 	width: 20px;
 	height: 15px;
 	border-radius: 20px;
-	right: -7%;
-	bottom: 48%;
+	right: 0%;
+	bottom: 50%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -197,6 +197,6 @@ svg {
 	fill: rgb(240, 180, 180, 0.6);
 }
 
-.card__liked>svg {
+.post__liked>svg {
 	fill: red;
 }
