@@ -38,7 +38,7 @@ const isLiked = post?.likes?.some((e) => e === currentUser._id);
             <img src={post?.author?.avatar} alt='avatar' className='post__author__ava'/>
             <div className='post_author__name'><h3>{post?.author?.name}</h3></div>
             </div>
-            <div>{dayjs(post.created_at).format("DD.MM.YYYY")}
+             <div>{dayjs(post.created_at).format("DD.MM.YYYY")} 
 
             <div>
             <button className={`post__favorite ${isLiked ? 'post__liked' : ''}`}>
@@ -46,7 +46,7 @@ const isLiked = post?.likes?.some((e) => e === currentUser._id);
               {post?.likes?.length !== 0 && <span className='post__likes'>{post?.likes?.length}</span>}
               </button>
               </div>
-            </div>
+            </div> 
             <div className='post__data__tag'>
               {post.tags?.map((e) => <span className='post__data__tag__span'>{e}</span>)}
             </div>

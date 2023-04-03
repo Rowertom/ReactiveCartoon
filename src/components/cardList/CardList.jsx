@@ -29,7 +29,7 @@ export const CardList = () => {
             </div>
             <div className='pagination'>
             {/* <CardPagination cards={cards} setData={(dat) => setData(dat)}/> */}
-            </div>
+            </div> 
         </div>
     );
 };

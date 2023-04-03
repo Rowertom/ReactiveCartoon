@@ -1,0 +1,52 @@
+
+.auth_controls{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 388px;
+    }
+    
+    .auth_input {
+    padding: 0 16px;
+    gap: 10px;
+    height: 48px;
+    background: #ffffff;
+    border: 1px solid #cfd8dc;
+    border-radius: 12px;
+    }
+    
+    .auth_input:focus,
+    .auth_input:hover {
+        border: 1px solid rgb(154, 202, 245);
+        caret-color: rgb(154, 202, 245);
+    }
+    
+    .auth__info {
+        text-align: left;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        color: #7B8E98;
+        margin: 0.75rem 0 1rem 0;
+    }
+    
+    .auth__actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .auth_link {
+    cursor: pointer;
+    text-align: right;
+    }
+    
+    .auth_warning {
+        color: red;
+    }
+    
+    .auth__back {
+    width: fit-content;
+    }

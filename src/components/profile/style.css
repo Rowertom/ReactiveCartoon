@@ -1,0 +1,42 @@
+h1 {
+color: white;
+}
+
+.profile__back {
+    text-align: left;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #7B8E98;
+    margin: 0.75rem 0 1rem 0;
+}
+
+.profile_input {
+    padding: 0 16px;
+    gap: 10px;
+    height: 2.5rem;
+    background: #ffffff;
+    border: 1px solid #cfd8dc;
+    border-radius: 12px;
+}
+
+.profile__user {
+    max-width: 740px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+}
+
+.profile__avatar{
+padding: 3rem 0 2rem 0;
+display: flex;
+gap: 2rem;
+align-items: center;
+}
+
+.profile__avatar-img{ 
+width: 200px;
+height: 200px;
+border-radius: 50%;
+}
