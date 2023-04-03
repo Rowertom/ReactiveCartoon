@@ -1,9 +1,19 @@
+const freshHeaders = ()=>{
+    return { headers: {
+      'content-type': 'application/json',
+      Authorization:
+        localStorage.getItem('token'),
+    }}
+  }
+
 const config = {
-    baseUrl: 'https://api.react-learning.ru/v2/group-10',
+    baseUrl: 'https://api.react-learning.ru',
     headers: {
         'content-type': 'application/json',
-        Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2VkNTI3NzU5Yjk4YjAzOGY3N2I2N2YiLCJncm91cCI6Imdyb3VwLTEwIiwiaWF0IjoxNjc2ODM3NTAyLCJleHAiOjE3MDgzNzM1MDJ9.VNrRedalnQcsqlCUxhZ91KRSfm2nGeDNvhYlHshirrk'
-    },
+    Authorization: 
+        localStorage.getItem('token')
+    }, 
+    freshHeaders:freshHeaders,
 };
 
 const onResponse = (res) => {
@@ -11,52 +21,72 @@ const onResponse = (res) => {
 };
 
 class Api {
-    constructor({ baseUrl, headers }) {
-        this._baseUrl = baseUrl;
-        this._headers = headers;
+    constructor(data) {
+        this._baseUrl = data.baseUrl;
+        this._headers = data.headers;
+        this._freshHeaders = data.freshHeaders;
     }
 
     getAllPosts() {
         return fetch(`${this._baseUrl}/posts`, {
-            headers: this._headers,
+            ...this._freshHeaders(),
             method: 'GET',
         }).then(onResponse);
     }
 
     getPostsById(id) {
         return fetch(`${this._baseUrl}/posts/${id}`, {
-            headers: this._headers,
+            ...this._freshHeaders(),
             method: 'GET',
         }).then(onResponse);
     }
 
+
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
-            headers: this._headers,
+            ...this._freshHeaders(),
             method: 'GET',
         }).then((res) => onResponse(res));
     }
+
+    updateUserInfo(body){
+        return fetch(`${this._baseUrl}/users/me`, {
+          ...this._freshHeaders(),
+          method: "PATCH",
+          body:JSON.stringify(body),
+        }).then(onResponse);
+      }
+
+    updateAvatar(avatar){
+        return fetch(`${this._baseUrl}/v2/group-10/users/me/avatar`, {
+          ...this._freshHeaders(),
+          method: "PATCH",
+          body:JSON.stringify(avatar),
+        }).then(onResponse);
+      }
     
+
+
     changeLikePostStatus(postId, like) {
         return fetch(`${this._baseUrl}/posts/likes/${postId}`, {
-            headers: this._headers,
+            ...this._freshHeaders(),
             method: like ? 'DELETE' : 'PUT',
         }).then((res) => onResponse(res));
     }
 
     deletePost(postId) {
         return fetch(`${this._baseUrl}/posts/${postId}`,{
-            headers: this._headers,
+            ...this._freshHeaders(),
             method: 'DELETE',
         }).then((res) => onResponse(res));
     }
 
     searchPosts(query) {
         return fetch(`${this._baseUrl}/posts/search/?query=${query}`, {
-            headers: this._headers,
+            ...this._freshHeaders(),
             method: 'GET',
         }).then((res) => onResponse(res));
     }
-}
+    }
 
 export const api = new Api(config);
