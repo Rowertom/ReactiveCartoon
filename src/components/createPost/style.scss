@@ -1,0 +1,19 @@
+.create{
+    background-color: rgb(255, 170, 13);
+    padding: 14px;
+    border-radius: 20px;
+    min-width: 500px;
+    &__btn{
+        padding: 5px 10px;
+        border-radius: 20px;
+        &__submit{
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+    }
+    &__post__input{
+        padding: 10px 20px;
+        border-radius: 20px ;
+    }
+
+}

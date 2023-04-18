@@ -110,26 +110,14 @@
 	color: #F44336;
 }
 
-.btn__type__comment {
-	background-color: #adaef3;
-	color:#f3edca;
+.delete__post{
+	cursor: pointer;
 }
-
-.btn__type__comment:hover {
+.delete__post:hover{
 	background-color: #FFAA0D;
-	color: #F44336;
+	border-radius: 20px;
+	padding: 5px;
 }
-
-.btn__type__delete {
-	background-color: #adaef3;
-	border: none;
-	color:#F44336;
-}
-
-.btn__type__delete:hover {
-	background-color: #FFAA0D;
-}
-
 svg {
 	fill: rgb(240, 180, 180, 0.6);
 }
@@ -140,4 +128,10 @@ svg {
 
 .link{
 	text-decoration: none;
+}
+
+.card__footer{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }

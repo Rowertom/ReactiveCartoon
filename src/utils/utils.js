@@ -36,4 +36,7 @@ export const useDebounce = (searchQuery, delay = 500) => {
     default: return cards;
 
   }
+
 }
+  export const findLike = (posts, currentUser) =>
+  posts?.likes?.some((el) => el === currentUser._id);

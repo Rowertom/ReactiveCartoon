@@ -15,7 +15,7 @@ import { Login } from '../auth/login/Login';
 import { Register } from '../auth/register/Register';
 import { ResetPass } from '../auth/resetPassword/ResetPassword';
 import { Profile } from '../profile/Profile';
-import { Favorites } from '../../pages/favorites/Favorites';
+import { Favourites } from '../../pages/favorites/Favorites';
 
 
 function App() {
@@ -23,12 +23,13 @@ function App() {
   const [cards, setCards] = useState([]);
   const [statSarch, setSarch] = useState('');
   const [currentUser, setCurrentUser] = useState({});
-  const [favorites, setFavorites] = useState([]);
+  const [favourites, setFavourites] = useState([]);
   const [isAuthentificated, setIsAuthentificated] = useState(false)
-  const [activeModal, setShowModal] =  useState(false) 
+  const [activeModal, setShowModal] = useState(false)
 
   const filterCards = (dataCards) => {
-    return dataCards.filter((e) => e.author._id === '63ed527759b98b038f77b67f' || e.author._id === '63ee62853aa285034f78ab18')
+    const newCards = dataCards.filter((e) => e.author._id === '63ed527759b98b038f77b67f' || e.author._id === '63ee62853aa285034f78ab18')
+    return newCards;
   }
 
   const handleSearch = (search) => {
@@ -43,11 +44,14 @@ function App() {
 
 
   useEffect(() => {
-    api.getAllPosts().then(posts => setCards(filterCards(posts)));
-  }, [isAuthentificated]);
-
-  useEffect(() => {
-    api.getUserInfo().then(userData => setCurrentUser(userData));
+    Promise.all([api.getUserInfo(), api.getAllPosts()]).then(
+      ([userData, posts]) => {
+        setCurrentUser(userData);
+        setCards(filterCards(posts));
+        const fav = posts.filter((e) => findLike(e, userData));
+        setFavourites(fav);
+      }
+    );
   }, [isAuthentificated]);
 
   function handlePostLike(posts) {
@@ -55,7 +59,9 @@ function App() {
     api.changeLikePostStatus(posts._id, isLiked).then((newCard) => {
       const newCards = cards.map((e) => e._id === newCard._id ? newCard : e);
       setCards([...newCards]);
+      setFavourites((favour) => !isLiked ? [...favour, newCard] : favour.filter((f) => f._id !== newCard._id) );
     });
+    return isLiked;
   }
 
   function deleteOwnPost(posts) {
@@ -74,90 +80,91 @@ function App() {
     setCards([...cardSorted]);
   }
 
-  const contextCardValue = { 
-    cards, 
-    handlePostLike, 
+  const contextCardValue = {
+    cards,
+    handlePostLike,
     deleteOwnPost,
-    favorites,
-   };
+    favourites,
+  };
 
-  const contextUserValue = { 
-    currentUser, 
-    setSarch, 
+  const contextUserValue = {
+    currentUser,
+    setSarch,
     setSortCards,
-    statSarch, 
-    isAuthentificated, 
-    setCurrentUser, 
+    statSarch,
+    isAuthentificated,
+    setIsAuthentificated,
+    setCurrentUser,
   };
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(()=>{
+  useEffect(() => {
     const token = localStorage.getItem('token')
-    if(token){
-    setIsAuthentificated(true)
-  } 
-  },[navigate]);
+    if (token) {
+      setIsAuthentificated(true)
+    }
+  }, [navigate]);
 
   return (
     <>
       <UserContext.Provider value={contextUserValue}>
         <CardContext.Provider value={contextCardValue}>
           <header className='container'>
-            <Header setShowModal={setShowModal}/>
+            <Header setShowModal={setShowModal} />
           </header>
           {isAuthentificated ?
-          <main className='container'>  
-            <Routes>
-              <Route path='/' element={<CatalogPage/>}></Route>
-              <Route path='/post/:postId' element={<PostPage/>}></Route>
-              <Route path="favorites" element={<Favorites/>}></Route>
-              <Route path='profile' element={<Profile/>}></Route>
-              <Route path='*' element={<Page404 />}></Route>
-              <Route path='/login' element={ <Modal activeModal={activeModal} setShowModal={setShowModal}>
-              <Login setShowModal={setShowModal}/>
+            <main className='container main'>
+              <Routes>
+                <Route path='/' element={<CatalogPage />}></Route>
+                <Route path='/post/:postId' element={<PostPage />}></Route>
+                <Route path="favourites" element={<Favourites />}></Route>
+                <Route path='profile' element={<Profile />}></Route>
+                <Route path='*' element={<Page404 />}></Route>
+                <Route path='/login' element={<Modal activeModal={activeModal} setShowModal={setShowModal}>
+                  <Login setShowModal={setShowModal} />
                 </Modal>
                 }
                 ></Route>
-              <Route path='/register' element={ <Modal activeModal={activeModal} setShowModal={setShowModal}>
-              <Register setShowModal={setShowModal}/>
+                <Route path='/register' element={<Modal activeModal={activeModal} setShowModal={setShowModal}>
+                  <Register setShowModal={setShowModal} />
                 </Modal>
                 }
                 ></Route>
-                <Route 
-              path="reset-password" 
-              element={
-              <Modal activeModal={activeModal} setShowModal={setShowModal}>
-                <ResetPass setShowModal={setShowModal}/>
-                </Modal>
-              }>
+                <Route
+                  path="reset-password"
+                  element={
+                    <Modal activeModal={activeModal} setShowModal={setShowModal}>
+                      <ResetPass setShowModal={setShowModal} />
+                    </Modal>
+                  }>
                 </Route>
-          </Routes>
-          </main>
-          : 
-          <div className='not__auth'>Пожалуйста, авторизуйтесь
-          <Routes>
-          <Route path='/login' element={ <Modal activeModal={activeModal} setShowModal={setShowModal}>
-              <Login setShowModal={setShowModal}/>
+              </Routes>
+            </main>
+            :
+            <div className='not__auth container main'>Пожалуйста, авторизуйтесь
+              <Routes>
+                <Route path='/login' element={<Modal activeModal={activeModal} setShowModal={setShowModal}>
+                  <Login setShowModal={setShowModal} />
                 </Modal>
                 }
                 ></Route>
-              <Route path='/register' element={ <Modal activeModal={activeModal} setShowModal={setShowModal}>
-              <Register setShowModal={setShowModal}/>
+                <Route path='/register' element={<Modal activeModal={activeModal} setShowModal={setShowModal}>
+                  <Register setShowModal={setShowModal} />
                 </Modal>
                 }
                 ></Route>
-                <Route 
-              path="reset-password" 
-              element={
-              <Modal activeModal={activeModal} setShowModal={setShowModal}>
-                <ResetPass setShowModal={setShowModal}/>
-                </Modal>
-              }>
+                <Route
+                  path="reset-password"
+                  element={
+                    <Modal activeModal={activeModal} setShowModal={setShowModal}>
+                      <ResetPass setShowModal={setShowModal} />
+                    </Modal>
+                  }>
                 </Route>
-          </Routes>
-          </div>}
+              </Routes>
+            </div>}
           <footer className='container'>
             <Footer />
           </footer>

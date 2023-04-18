@@ -17,6 +17,6 @@ export const CatalogPage = () => {
                 По запросу {statSarch} найдено {cast(cards.length)}
             </p>
         )}
-        <CardList />
+        <CardList cards={cards}/>
     </>
 };

@@ -12,15 +12,15 @@ import Menu from '@mui/material/Menu';
 import { Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as Login } from '../../assets/images/loginh.svg';
 import { useContext } from "react";
+import { Modal } from '../modal/Modal';
+import { CreatePost } from '../createPost/CreatPost';
 
-export const Header = ({setShowModal}) => {
-
-    const handleAddContent = () => {
-        console.log('Есть контакт')
-    };
+export const Header = ({ setShowModal }) => {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const {isAuthentificated}= useContext(UserContext);
+    const [createPostModal, setCreatePostModal] = React.useState(false);
+
+    const { isAuthentificated, setIsAuthentificated } = useContext(UserContext);
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -30,64 +30,68 @@ export const Header = ({setShowModal}) => {
         setAnchorEl(null);
     };
 
-   const navigate= useNavigate()
+    const navigate = useNavigate()
 
-    const handleLogout=()=>{
+    const handleLogout = () => {
         localStorage.removeItem('token');
         navigate('/login')
+        setIsAuthentificated(false);
         handleClose()
     }
 
-    const handleProfile=()=>{
-    navigate('/profile')
-    handleClose()
+    const handleProfile = () => {
+        navigate('/profile')
+        handleClose()
     }
 
-const handleFavorit =()=>{
-    navigate('/favorites')
-    handleClose()
+    const handleFavorit = () => {
+        navigate('/favourites')
+        handleClose()
     }
 
     return (
         <>
-        <div className='header'>
-            <div className='contain'>
+            <div className='header'>
                 <div className='header__wrap'>
                     <div className='header__left'>
                         <Logo />
                         <Search />
-                        <button className='btn_header' onClick={handleAddContent}>СОЗДАТЬ ПОСТ</button>
+                        <div>
+                            <button className='btn_header' onClick={() => setCreatePostModal(true)}>СОЗДАТЬ ПОСТ</button>
+                            {createPostModal && <Modal activeModal={createPostModal} setShowModal={setCreatePostModal}>
+                                <CreatePost setCreatePostModal={setCreatePostModal} />
+                            </Modal>}
+                        </div>
                     </div>
-                   {!isAuthentificated ? <Link to={"/login"} className="header_link" onClick={()=>setShowModal(true)}>
-                        <Login/>
-                        </Link> :
-                    <div className='header__rait'>
-                        <User />
-                        <Box sx={{ flexGrow: 1 }}>
-                            <div>
-                                <IconButton className='ava'
-                                    alt='аватар'
-                                    onClick={handleMenu}
-                                >
-                                    <Avatar />
-                                </IconButton>
-                                <Menu
-                                    id="menu-appbar"
-                                    anchorEl={anchorEl}
-                                    keepMounted
-                                    open={Boolean(anchorEl)}
-                                    onClose={handleClose}
-                                >
-                                    <MenuItem onClick={handleProfile}>Профиль</MenuItem>
-                                    <MenuItem onClick={handleFavorit}>Избранное</MenuItem>
-                                    <MenuItem onClick={handleLogout}>Выйти</MenuItem>
-                                </Menu>
-                            </div>
-                        </Box>
-                    </div>}
+                    {!isAuthentificated ? <Link to={"/login"} className="header_link" onClick={() => setShowModal(true)}>
+                        <Login />
+                    </Link> :
+                        <div className='header__rait'>
+                            <User />
+                            <Box sx={{ flexGrow: 1 }}>
+                                <div>
+                                    <IconButton className='ava'
+                                        alt='аватар'
+                                        onClick={handleMenu}
+                                    >
+                                        <Avatar />
+                                    </IconButton>
+                                    <Menu
+                                        id="menu-appbar"
+                                        anchorEl={anchorEl}
+                                        keepMounted
+                                        open={Boolean(anchorEl)}
+                                        onClose={handleClose}
+                                    >
+                                        <MenuItem onClick={handleProfile}>Профиль</MenuItem>
+                                        <MenuItem onClick={handleFavorit}>Избранное</MenuItem>
+                                        <MenuItem onClick={handleLogout}>Выйти</MenuItem>
+                                    </Menu>
+                                </div>
+                            </Box>
+                        </div>}
                 </div>
             </div>
-        </div>
         </>
     );
-    }
+}

@@ -42,11 +42,13 @@
 
 .not__auth {
   display: flex;
-  min-height: 505px;
   flex: 1 0 auto;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: black;
+  font-size: 30px;
+  background: url('../../assets/images/boom2.png') center center no-repeat;
+  background-size: 100%;
   }
 
 @keyframes App-logo-spin {
@@ -63,4 +65,8 @@
   background-color: rgba(21, 32, 236, 0.4);
   border-radius: 10px;
   
+}
+
+.main{
+  min-height: 800px;
 }

@@ -1,26 +1,12 @@
 .post_card {
-	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 10px;
 	border: solid;
 	border-color: rgb(154, 202, 245);
-	border-radius: 10px;
+	border-radius: 20px;
 	background: rgba(21, 32, 236, 0.4);
-}
-
-.post__header {
-	width: 100%;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-}
-
-.post__title {
-	font-size: 20px;
-	color: #f1f50a;
-	
+	margin-bottom: 10px;
 }
 
 .post_btn {
@@ -45,41 +31,64 @@
 	color: #F44336;
 }
 
+.post__header {
+	width: 100%;
+	/* display: flex;
+	justify-content: space-around;
+	align-items: center;*/
 
-.post_imgWrapper{
-		flex: 1;
 }
 
-.post__image {
-	max-width: 488px;  
-	object-fit: contain;
-	margin-bottom: 16px;
-}
+.post__title {
+	font-size: 20px;
+	color: #f1f50a;
 
+}
 
 .post__desc {
+	width: 100%;
 	font-size: 16px;
 	padding-top: 14px;
 	font-weight: 600;
-	position: relative;
 	background-color: rgba(21, 32, 236, 0.2);
 	color: whitesmoke;
 	display: flex;
 	gap: 20px;
-	margin-bottom: 20px;
-	margin-left: 20px;
-	margin-right: 20px;
+	justify-content: space-around;
+	border-radius: 10px;
+}
+
+.post__image {
+	max-width: 488px;
+	object-fit: contain;
+	margin-bottom: 16px;
 }
 
 .post__text {
 	font-size: 16px;
-	padding-top: 14px;
+	padding: 14px 20px;
 	font-weight: 600;
 	background-color: rgba(21, 32, 236, 0.2);
 	color: whitesmoke;
-	margin-bottom: 40px;
-	margin-left: 20px;
-	margin-right: 20px;
+	border-radius: 10px;
+}
+
+.post__info {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+	align-items: flex-start;
+}
+
+.post__info__date__title {
+	font-size: 14px;
+	font-weight: 300;
+}
+
+.post__info__like{
+	display: flex;
+	align-items: center;
+	gap: 20px;
 }
 
 .post__favorite {
@@ -102,13 +111,13 @@
 	color: wheat;
 }
 
-.post_author__name{
+.post_author__name {
 	color: aqua;
-	margin:0;
+	margin: 0;
 	padding-right: 20px;
 }
 
-.post_info__header{
+.post_info__header {
 	width: 100%;
 	display: flex;
 	justify-content: space-around;
@@ -117,16 +126,14 @@
 	padding-right: 10px;
 }
 
-.post__author__ava{
+.post__author__ava {
 	display: block;
-    border-radius: 100%;
-    width: 50px;
-    height: 50px;
-    background: #fff;
-    box-shadow: -1px 3px 3px rgba(0,0,0,0.3);
+	border-radius: 100%;
+	width: 50px;
+	height: 50px;
+	background: #fff;
+	box-shadow: -1px 3px 3px rgba(0, 0, 0, 0.3);
 }
-
-
 
 .post_card:hover {
 	box-shadow: 10px 5px 5px rgba(230, 15, 15, 0.3), 10px 8px 16px rgba(233, 9, 46, 0.4);
@@ -160,43 +167,15 @@
 	padding: 5px;
 }
 
-
-
-.post__likes {
-	position: absolute;
-	color: bisque;
-	font-size: 12px;
-	background-color: rgb(93, 150, 150);
-	width: 20px;
-	height: 15px;
-	border-radius: 20px;
-	right: 0%;
-	bottom: 50%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-
-
-
-
-
-.btn__type__comment {
-	background-color: #adaef3;
-	color:#f3edca;
-}
-
-.btn__type__comment:hover {
-	background-color: #FFAA0D;
-	color: #F44336;
-}
-
-
 svg {
 	fill: rgb(240, 180, 180, 0.6);
 }
 
 .post__liked>svg {
 	fill: red;
+}
+
+.post__update{
+	padding: 10px 20px;
+	border-radius: 20px;
 }
