@@ -4,12 +4,13 @@ import { useForm } from "react-hook-form";
 import { api } from "../../utils/Api";
 import { ReactComponent as Basket } from '../../assets/icons/basket.svg';
 import './style.scss';
+import { useSelector } from "react-redux";
 
-export const Comment = ({ post, onSendReview, currentUser, onDeleteComment }) => {
+export const Comment = ({ post, onSendReview, onDeleteComment }) => {
     const [users, setUsers] = useState([]);
     const [commentsPost, setCommentsPost] = useState(post.comments ?? []);
     const [showForm, setShowForm] = useState(false);
-
+    const currentUser = useSelector(s => s.user.data);
     const {
         register,
         handleSubmit,

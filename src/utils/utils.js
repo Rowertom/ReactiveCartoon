@@ -39,4 +39,9 @@ export const useDebounce = (searchQuery, delay = 500) => {
 
 }
   export const findLike = (posts, currentUser) =>
-  posts?.likes?.some((el) => el === currentUser._id);
+  posts?.likes?.some((el) => el === currentUser?._id);
+
+  export const filterCards = (dataCards) => {
+    const newCards = dataCards.filter((e) => e.author._id === '63ed527759b98b038f77b67f' || e.author._id === '63ee62853aa285034f78ab18')
+    return newCards;
+  }

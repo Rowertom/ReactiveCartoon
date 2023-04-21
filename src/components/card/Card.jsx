@@ -2,23 +2,29 @@ import ImageAvatar from './avatar/Avatar';
 import { ReactComponent as Like } from '../../assets/icons/like.svg';
 import { ReactComponent as Basket } from '../../assets/icons/basket.svg';
 import './style.css';
-import { useContext } from 'react';
-import { CardContext } from '../../context/CardContext';
-import { UserContext } from '../../context/UserContext';
 import { Link } from 'react-router-dom';
 import { findLike } from '../../utils/utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchChangePostLike, fetchDeletePost } from '../../storage/cardsSlice/cardsSlice';
 
 export const Card = ({ date, image, title, text, author, posts }) => {
 
-  const {handlePostLike, deleteOwnPost} = useContext(CardContext);
-  const {currentUser} = useContext(UserContext);
+  const currentUser = useSelector(s => s.user.data);
+  const dispatch = useDispatch();
 
+  //лайкаем пост
   const isLiked = findLike(posts, currentUser);
   function handleLikeClick() {
-    handlePostLike(posts);
+    dispatch(fetchChangePostLike(posts));
   }
+
+  //удаляем пост
   function handleDeleteClick() {
-    deleteOwnPost(posts);
+    if (posts.author._id === currentUser._id && window.confirm('Вы уверены что хотите удалить этот пост?')) {
+      dispatch(fetchDeletePost(posts));
+    } else if (posts.author._id !== currentUser._id) {
+      window.alert("Вы не можете удалить чужой пост");
+    }
   }
 
   return (
@@ -40,7 +46,7 @@ export const Card = ({ date, image, title, text, author, posts }) => {
           <img src={image} alt='card__image' className='card__image' />
         </div>
         <div className='card__data__tag'>
-        {posts.tags?.map((e) => (<span key={e}className='post__data__tag__span'>{e}</span>))}
+          {posts.tags?.map((e) => (<span key={e} className='post__data__tag__span'>{e}</span>))}
         </div>
       </div>
       <div className='card__desc'>
@@ -49,13 +55,13 @@ export const Card = ({ date, image, title, text, author, posts }) => {
       </div>
       <div className='card__links'>
         <div>
-        <button  className='btn btn__type__primary'>
-          <Link to={`/post/${posts._id}`} className='link'>Читать подробнее</Link>
+          <button className='btn btn__type__primary'>
+            <Link to={`/post/${posts._id}`} className='link'>Читать подробнее</Link>
           </button>
         </div>
         <div className='card__footer'>
-        <p className='author__date'>{date}</p>
-         <Basket onClick={handleDeleteClick} className='delete__post'/>
+          <p className='author__date'>{date}</p>
+          <Basket onClick={handleDeleteClick} className='delete__post' />
         </div>
       </div>
     </div >

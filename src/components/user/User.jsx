@@ -1,16 +1,19 @@
-import { useContext } from 'react';
-import { UserContext } from '../../context/UserContext';
 import './style.css';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const User =()=> {
 
-    const { currentUser } = useContext(UserContext);
+    const navigate = useNavigate();
+   const currentUser = useSelector(s => s.user.data);
+
+   const handleProfile = () => {
+    navigate('/profile')
+}
 
 return (
-    <a href="/" className='user_container user__links'>
-        <span>{currentUser.name}</span>
-        {/* <span>{currentUser.about}</span>
-        <span>{currentUser.email}</span> */}
-    </a>
+    <Link to={'/profile'} className='user_container user__links' onClick={handleProfile}>
+        <span>{currentUser.name}</span> 
+    </Link>
 )
 }

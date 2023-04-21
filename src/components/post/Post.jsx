@@ -8,13 +8,15 @@ import { findLike } from '../../utils/utils';
 import { Comment } from '../comments/Comments';
 import { Modal } from '../modal/Modal';
 import { UpdatePost } from '../updatePost/UpdatePost';
+import { useSelector } from 'react-redux';
 
 
 
-export const Post = ({ post, onPostLike, currentUser, onSendReview, onDeleteComment }) => {
+export const Post = ({ post, onPostLike, onSendReview, onDeleteComment }) => {
 
   const [like, setLike] = useState(false);
   const [updatePostModal, setUpdatePostModal] = React.useState(false);
+  const currentUser = useSelector(s => s.user.data);
 
   const navigate = useNavigate();
 
@@ -73,7 +75,6 @@ export const Post = ({ post, onPostLike, currentUser, onSendReview, onDeleteComm
           post={post}
           onSendReview={onSendReview}
           onDeleteComment={onDeleteComment}
-          currentUser={currentUser}
         />
       </div>
     </>

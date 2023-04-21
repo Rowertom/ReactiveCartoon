@@ -1,12 +1,11 @@
-import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { CardList } from "../../components/cardList/CardList"
-import { CardContext } from "../../context/CardContext"
 import './style.css'
+import { useSelector } from "react-redux"
 
 export const Favourites =()=>{
-    const {favourites}= useContext(CardContext)
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const favourites = useSelector(s => s.cards.favourites);
     
     return (
         <>

@@ -1,19 +1,21 @@
 import { useParams } from "react-router-dom"
 import { Post } from "../../components/post/Post"
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../context/UserContext";
-import { CardContext } from "../../context/CardContext";
+import { useEffect, useState } from "react";
 import { api } from "../../utils/Api";
+import { useDispatch, useSelector } from "react-redux";
+import { findLike } from "../../utils/utils";
+import { fetchChangePostLike } from "../../storage/cardsSlice/cardsSlice";
 
 export const PostPage = () => {
     const id = useParams();
     const [post, setPost] = useState(null);
 
-    const { currentUser } = useContext(UserContext);
-    const { handlePostLike } = useContext(CardContext);
+    const currentUser = useSelector(s => s.user.data);
+    const dispatch = useDispatch();
 
     const onPostLike = () => {
-        const wasLiked = handlePostLike(post);
+        const wasLiked = findLike(post, currentUser);
+        dispatch(fetchChangePostLike(post));
         if (wasLiked) {
             const filteredLikes = post?.likes.filter(e => e !== currentUser._id);
             setPost({ ...post, likes: filteredLikes });
@@ -45,7 +47,6 @@ export const PostPage = () => {
             onSendReview={onSendReview}
             onDeleteComment={deleteComment}
             onPostLike={onPostLike}
-            currentUser={currentUser}
         />
         : <div>Loading</div>
     )

@@ -9,7 +9,11 @@ import { authApi } from "../../../utils/auth.Api";
 
 
 export const Login = ({ setShowModal }) => {
-    const { register, handleSubmit, formState: { errors } } = useForm({ mode: "onSubmit" });
+    const { register, 
+        handleSubmit, 
+        formState: { errors } 
+    } = useForm({ mode: "onSubmit" });
+    
     const navigate = useNavigate();
 
     const handleClick = (e) => {
