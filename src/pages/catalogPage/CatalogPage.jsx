@@ -1,22 +1,21 @@
-import { useContext } from "react"
 import { CardList } from "../../components/cardList/CardList";
+import { Paginate } from "../../components/pagination/Pagination";
 import { Sort } from "../../components/sort/Sort";
-import { CardContext } from "../../context/CardContext"
-import { UserContext } from "../../context/UserContext";
 import { cast } from "../../utils/utils";
+import { useSelector } from "react-redux";
 
-export const CatalogPage = () => {
+export const CatalogPage = ({search}) => {
 
-    const { cards } = useContext(CardContext);
-    const { statSarch } = useContext(UserContext);
+    const cards = useSelector(s => s.cards.posts);
 
     return <>
         <Sort />
-        {statSarch && (
+        {search && (
             <p className='countPosts'>
-                По запросу {statSarch} найдено {cast(cards.length)}
+                По запросу {search} найдено {cast(cards.length)}
             </p>
         )}
         <CardList cards={cards}/>
+        <Paginate/>
     </>
 };

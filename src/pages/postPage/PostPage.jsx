@@ -1,53 +1,24 @@
 import { useParams } from "react-router-dom"
 import { Post } from "../../components/post/Post"
-import { useEffect, useState } from "react";
-import { api } from "../../utils/Api";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { findLike } from "../../utils/utils";
-import { fetchChangePostLike } from "../../storage/cardsSlice/cardsSlice";
+import { fetchPost } from "../../storage/postSlice/postSlice";
 
 export const PostPage = () => {
     const id = useParams();
-    const [post, setPost] = useState(null);
 
     const currentUser = useSelector(s => s.user.data);
+    const post = useSelector(s => s.post.post);
     const dispatch = useDispatch();
 
-    const onPostLike = () => {
-        const wasLiked = findLike(post, currentUser);
-        dispatch(fetchChangePostLike(post));
-        if (wasLiked) {
-            const filteredLikes = post?.likes.filter(e => e !== currentUser._id);
-            setPost({ ...post, likes: filteredLikes });
-        } else {
-            const addedLikes = [...post.likes, currentUser._id];
-            setPost({ ...post, likes: addedLikes });
-        }
-    }
-
-    const onSendReview = (newPost) => {
-        setPost(() => ({ ...newPost }));
-    }
-
-    const deleteComment = async (id) => {
-        const result = await api.deleteComment(post._id, id);
-        setPost(state => ({ ...result }));
-        return result;
-    }
-
+    //получение поста по id
     useEffect(() => {
-        if (!id?.postId) return
-        api.getPostsById(id?.postId).then((data) => setPost(data));
+        if (!id?.postId) return;
+        dispatch(fetchPost(id?.postId))
     }, [id?.postId]);
 
     return (post && currentUser ?
-        <Post
-            id={id.postId}
-            post={post}
-            onSendReview={onSendReview}
-            onDeleteComment={deleteComment}
-            onPostLike={onPostLike}
-        />
+        <Post post = {post}/>
         : <div>Loading</div>
     )
 };

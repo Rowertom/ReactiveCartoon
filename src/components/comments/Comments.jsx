@@ -4,46 +4,51 @@ import { useForm } from "react-hook-form";
 import { api } from "../../utils/Api";
 import { ReactComponent as Basket } from '../../assets/icons/basket.svg';
 import './style.scss';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCommentPost, fetchDeleteComment, hideComments, showMoreComments } from "../../storage/postSlice/postSlice";
 
-export const Comment = ({ post, onSendReview, onDeleteComment }) => {
+export const Comment = ({ post }) => {
     const [users, setUsers] = useState([]);
-    const [commentsPost, setCommentsPost] = useState(post.comments ?? []);
     const [showForm, setShowForm] = useState(false);
+
+    const dispatch = useDispatch();
+
     const currentUser = useSelector(s => s.user.data);
+    const comments = useSelector(s => s.post.comments);
+
     const {
         register,
         handleSubmit,
         reset,
     } = useForm({ mode: "onSubmit" });
 
+    //создание комментария
     const sendReview = async (data) => {
-        try {
-            const newPost = await api.addComment(post._id, { text: data.comment })
-            onSendReview(newPost);
-            setCommentsPost(state => [...newPost.comments])
-            setShowForm(false);
-            reset();
-            alert('отзыв создан')
-        } catch (error) {
-            alert('ошибка')
-        }
+        await dispatch(fetchCommentPost({ id: post?._id, text: data.comment }));
+        setShowForm(false);
+        reset();
     }
 
+    //получение всех юзеров
     useEffect(() => {
         api.getUsers().then((data) => {
-            setUsers(data)})
-        
+            setUsers(data)
+        })
     }, []);
 
+    //удаление комментария
     const deleteComment = async (id) => {
-        try {
-            const res = await onDeleteComment(id);
-            alert("отзыв удален")
-            setCommentsPost(() => [...res.comments])
-        } catch (error) {
-            alert('ошибка удаления')
-        }
+        await dispatch(fetchDeleteComment({ postId: post._id, commentId: id }));
+    }
+
+    //показать больше комментариев
+    function handleClickMoreComments() {
+        dispatch(showMoreComments());
+    }
+
+    //скрыть комментарии
+    function handleClickHideComments() {
+        dispatch(hideComments());
     }
 
     const options = {
@@ -75,8 +80,7 @@ export const Comment = ({ post, onSendReview, onDeleteComment }) => {
                     </Form>
                 </div>}
             </div>
-            {users && commentsPost
-                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+            {users && comments
                 .map((r) =>
                     <div className="posted__comment" key={r._id} >
                         <div className="posted__comment__title">
@@ -91,9 +95,19 @@ export const Comment = ({ post, onSendReview, onDeleteComment }) => {
                                 {r.text}
                             </span>
                             {currentUser?._id === r.author._id &&
-                                <Basket onClick={() => deleteComment(r._id)} />
+                                <Basket onClick={() => deleteComment(r._id)} className="comments__basket" />
                             }
                         </div>
                     </div>)}
+            {post?.comments?.length ?
+                <div className="countComments">
+                    {!comments.length || post?.comments?.length !== comments?.length ?
+                        <span className="countComments__more" onClick={() => handleClickMoreComments()}>Показать больше</span>
+                        : ''
+                    }
+                    <span className="countComments__hide" onClick={() => handleClickHideComments()}>Скрыть комментарии</span>
+                </div>
+                : ''
+            }
         </div>);
 }

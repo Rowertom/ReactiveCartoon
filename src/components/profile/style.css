@@ -2,6 +2,24 @@ h1 {
 color: white;
 }
 
+.profile__header {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+}
+
+.header__change{
+    background-color: rgba(255, 255, 255, 0.2);
+    color: rgb(177, 166, 166);
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.header__change:hover {
+    box-shadow: 5px 5px 10px red;
+    color: red;
+}
+
 .profile__back {
     text-align: left;
     font-weight: 400;

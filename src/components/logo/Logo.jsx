@@ -7,7 +7,7 @@ export const Logo = () => {
   return (
     <Link to='/' className='logo_text'>
       <img src={logoSrc} alt='лого компании' className='logo-pic' />
-      REACTIVE CARTOONS
+      CREATIVE CARTOONS
     </Link>
   );
 };

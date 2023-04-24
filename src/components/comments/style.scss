@@ -1,4 +1,4 @@
-.comments{
+.comments {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -6,39 +6,42 @@
     margin-bottom: 20px;
     background-color: rgba(21, 32, 236, 0.2);
     border-radius: 10px;
-    &__input{
+
+    &__input {
         padding: 14px;
     }
 }
-.comments__input__form{
+
+.comments__input__form {
     padding: 14px 0;
     display: flex;
     flex-direction: column;
     gap: 14px;
 
-    &__text{
+    &__text {
         color: white;
         font-size: 18px;
         font-weight: 500;
     }
-    
-    &__type{
+
+    &__type {
         border: 1px solid #eceff1;
         border-radius: 16px;
         padding: 1rem;
         resize: none;
     }
 }
+
 .btn__type__primary {
-	background-color: #adaef3;
+    background-color: #adaef3;
 }
 
 .btn__type__primary:hover {
-	background-color: #FFAA0D;
-	color: #F44336;
+    background-color: #FFAA0D;
+    color: #F44336;
 }
 
-.posted__comment{
+.posted__comment {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -47,14 +50,15 @@
     padding: 20px 20px 10px 20px;
     margin-bottom: 10px;
 
-    &__title{
+    &__title {
         color: rgba(245, 245, 245, 0.7);
         font-size: 12px;
         display: flex;
         align-items: center;
         gap: 40px;
     }
-    &__content{
+
+    &__content {
         display: flex;
         justify-content: space-between;
         color: white;
@@ -62,14 +66,46 @@
     }
 }
 
-.posted__comment__author{
+.posted__comment__author {
     display: flex;
     align-items: center;
     gap: 10px;
     font-weight: 700;
 }
-.author__ava{
+
+.author__ava {
     width: 30px;
     border-radius: 50%;
 }
 
+.countComments{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 0 0 10px 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    &__more{
+        cursor: pointer;
+        color: white;
+        padding: 14px;
+        width: 100%;
+        border-radius: 0 0 10px 10px;
+        text-align: center;
+        &:hover{
+            background-color: rgba(255, 255, 255, 0.5);
+            color: red;
+        }
+    }
+    &__hide{
+        cursor: pointer;
+        color: white;
+        padding: 14px;
+        width: 100%;
+        border-radius: 0 0 10px 10px;
+        text-align: center;
+        &:hover{
+            background-color: rgba(255, 255, 255, 0.5);
+            color: red;
+        }
+    }
+}

@@ -1,15 +1,23 @@
-import { useContext } from "react"
-import { UserContext } from "../../context/UserContext"
+import { useDispatch } from 'react-redux';
 import './style.scss'
+import { sortedCards } from "../../storage/cardsSlice/cardsSlice";
 
 
 export const Sort = () => {
 
-    const {setSortCards} = useContext(UserContext);
+    const dispatch = useDispatch();
+
     const sortedItems = [
         {id: 'Новинки'},
         {id: 'Популярные'},
+        {id: 'Непопулярные'},
+        {id: 'Старые посты'},
     ];
+
+    //вызываем action сортировки карточек
+    const setSortCards = (id) => {
+        dispatch(sortedCards(id));
+    }
 
     return (
         <div className="sort__cards">

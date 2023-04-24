@@ -1,14 +1,10 @@
-import { useContext } from 'react'
-import { UserContext } from '../../context/UserContext'
 import './style.css'
 
-export const Search = ()=>{
-
-const {setSarch} = useContext(UserContext);
+export const Search = ({ setSearch }) => {
 
     return (
-    <input placeholder='Поиск' 
-    onChange={(e)=>setSarch(e.target.value)} 
-    className="search__input"/>
+        <input placeholder='Поиск'
+            onChange={(e) => setSearch(e.target.value)}
+            className="search__input" />
     )
 }

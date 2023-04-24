@@ -16,13 +16,11 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        gap: 10;
     }
     
     .header__rait {
         display: flex;
         align-items: center;
-        gap: 20;
         justify-content: flex-end;
         margin-right: 30px;
     }
