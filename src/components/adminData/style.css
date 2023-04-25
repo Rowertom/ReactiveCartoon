@@ -15,5 +15,11 @@ padding-bottom: 2rem;
 }
 
 
+@media ( max-width: 900px) {
+  .statistic{
+    display: none;
+  }
+}
+
   
       

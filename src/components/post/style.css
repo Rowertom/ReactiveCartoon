@@ -177,12 +177,43 @@ svg {
 	border-radius: 20px;
 }
 
-.comments__basket{
+.comments__basket {
 	cursor: pointer;
 	padding: 3px;
 }
 
-.comments__basket:hover{
+.comments__basket:hover {
 	border-radius: 50%;
 	box-shadow: 2px 2px 5px red;
+}
+
+@media (max-width: 900px) {
+	.post__desc {
+		flex-direction: column;
+	}
+
+	.post__image {
+		width: 100%;
+		max-width: none;
+		object-fit: contain;
+		margin-bottom: 16px;
+	}
+
+	.post__info {
+		display: flex;
+		flex-direction: row;
+		gap: 10px;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+	}
+
+	.post_info__header {
+		width: 100%;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		gap: 20px;
+		padding-right: none;
+	}
 }

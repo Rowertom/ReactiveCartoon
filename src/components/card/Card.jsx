@@ -52,7 +52,7 @@ export const Card = ({ date, image, title, text, author, posts }) => {
     <div className='card'>
       <div className='card__header'>
         <div className='card__author__ava'>
-          <ImageAvatar authorSrc={author?.avatar} />
+          <ImageAvatar className='card__avatar' authorSrc={author?.avatar} />
         </div>
         <div className='card__author__data'>
           <h3 className='author__name'>{author?.name}</h3>

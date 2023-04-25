@@ -66,7 +66,7 @@ export const Header = ({
                     <div className='header__left'>
                         <Logo />
                         <Search setSearch={setSearch} />
-                        <div>
+                        <div className='header__create'>
                             <button className='btn_header' onClick={() => setCreatePostModal(true)}>СОЗДАТЬ ПОСТ</button>
                             {createPostModal && <Modal activeModal={createPostModal} setShowModal={setCreatePostModal}>
                                 <CreatePost setCreatePostModal={setCreatePostModal} />

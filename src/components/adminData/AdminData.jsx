@@ -138,7 +138,7 @@ export const AdminData = () => {
     },
   }, 'dark');
 
-  return <div>
+  return <div className='statistic'>
     <button className='post_btn btn__type__primary' onClick={() => navigate(-1)}>{'< '}Назад</button>
     <div className='admin'>
       <h1>Статистика</h1>

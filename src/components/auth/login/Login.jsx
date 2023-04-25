@@ -6,14 +6,15 @@ import { useNavigate } from "react-router-dom";
 import { pattern } from "../../../utils/validations";
 import { useEffect } from "react";
 import { authApi } from "../../../utils/auth.Api";
+import { toast } from "react-toastify";
 
 
 export const Login = ({ setShowModal }) => {
-    const { register, 
-        handleSubmit, 
-        formState: { errors } 
+    const { register,
+        handleSubmit,
+        formState: { errors }
     } = useForm({ mode: "onSubmit" });
-    
+
     const navigate = useNavigate();
 
     const handleClick = (e) => {
@@ -38,8 +39,9 @@ export const Login = ({ setShowModal }) => {
             const res = await authApi.login(data);
             localStorage.setItem('token', res.token);
             navigate('/')
+            toast.success('Вы успешно вошли')
         } catch (error) {
-            alert('Неправильные логин и пароль')
+            toast.error('Неправильные логин и пароль')
         }
     }
 

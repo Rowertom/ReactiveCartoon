@@ -1,11 +1,25 @@
-.sort__cards{
+.sort__cards {
     display: flex;
     width: 100%;
     background-color: inherit;
     padding: 10px;
     gap: 30px;
     border-radius: 20px;
-    &__item{
+
+    @media (max-width: 780px) {
+        display: grid;
+        grid-template-columns: repeat(2, 200px);
+        gap: 1rem;
+
+    }
+
+    @media (max-width: 480px) {
+        display: grid;
+        grid-template-columns: repeat(1, 90%);
+        gap: 1rem;
+    }
+
+    &__item {
         // display: inline-block;
         background-color: blue;
         color: white;
@@ -14,9 +28,17 @@
         border-radius: 10px;
         padding: 5px 10px;
         cursor: pointer;
-        &:hover{
-            background-color: rgba( blue, 0.3);
+
+        &:hover {
+            background-color: rgba(blue, 0.3);
             box-shadow: 10px 3px 5px red;
+        }
+
+        @media (max-width: 780px) {
+            &:hover {
+                box-shadow: none;
+                padding: none;
+            }
         }
     }
 }

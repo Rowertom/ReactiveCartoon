@@ -43,7 +43,6 @@ color: white;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-
 }
 
 .profile__avatar{
@@ -51,10 +50,21 @@ padding: 3rem 0 2rem 0;
 display: flex;
 gap: 2rem;
 align-items: center;
+width: 100%;
 }
 
 .profile__avatar-img{ 
 width: 200px;
 height: 200px;
 border-radius: 50%;
+}
+
+@media (max-width: 720px){
+    .profile__user {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    
+    }
 }
