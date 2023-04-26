@@ -65,16 +65,16 @@ export const Header = ({
                 <div className='header__wrap'>
                     <div className='header__left'>
                         <Logo />
-                        <Search setSearch={setSearch} />
+                        {isAuthentificated && <Search setSearch={setSearch} />}
                         <div className='header__create'>
-                            <button className='btn_header' onClick={() => setCreatePostModal(true)}>СОЗДАТЬ ПОСТ</button>
+                            {isAuthentificated && <button className='btn_header' onClick={() => setCreatePostModal(true)}>СОЗДАТЬ ПОСТ</button>}
                             {createPostModal && <Modal activeModal={createPostModal} setShowModal={setCreatePostModal}>
                                 <CreatePost setCreatePostModal={setCreatePostModal} />
                             </Modal>}
                         </div>
                     </div>
                     {!isAuthentificated ? <Link to={"/login"} className="header_link" onClick={() => setShowModal(true)}>
-                        <Login />
+                        <Login /> Вход
                     </Link> :
                         <div className='header__rait'>
                             <User />

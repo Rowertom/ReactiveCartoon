@@ -13,12 +13,14 @@ export const Paginate = () => {
 
     function handlePageChange(event, page) {
         dispatch(setPage(page));
+        window.scrollTo(0, 0);
     }
 
     return (
         <div className='pagination'>
             <Pagination
                 color="primary"
+                variant="text"
                 count={Math.ceil(total / pageSize)}
                 onChange={handlePageChange}
             />

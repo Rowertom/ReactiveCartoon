@@ -105,7 +105,10 @@ export const Comment = ({ post }) => {
                         <span className="countComments__more" onClick={() => handleClickMoreComments()}>Показать больше</span>
                         : ''
                     }
-                    <span className="countComments__hide" onClick={() => handleClickHideComments()}>Скрыть комментарии</span>
+                    {comments?.length !== 0 ?
+                        <span className="countComments__hide" onClick={() => handleClickHideComments()}>Скрыть комментарии</span>
+                        : ''
+                    }
                 </div>
                 : ''
             }

@@ -55,6 +55,9 @@
 .header_link {
     text-decoration: none;
     padding-right: 40px;
+    display: flex;
+    align-items: center;
+    color: white;
 }
 
 @media (max-width: 720px) {

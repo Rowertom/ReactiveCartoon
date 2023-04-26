@@ -214,6 +214,6 @@ svg {
 		justify-content: flex-start;
 		align-items: center;
 		gap: 20px;
-		padding-right: none;
+		padding-right: 0;
 	}
 }
