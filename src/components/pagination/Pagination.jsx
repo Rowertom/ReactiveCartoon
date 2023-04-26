@@ -23,6 +23,7 @@ export const Paginate = () => {
                 variant="text"
                 count={Math.ceil(total / pageSize)}
                 onChange={handlePageChange}
+                size={'large'}
             />
         </div>
     );

@@ -8,11 +8,11 @@ export const cast = (numb) => {
     return numb + " постов";
   }
   switch (numb % 10) {
-    case 1: return numb + " пост";
+    case 1: return ' найден ' + numb + " пост";
     case 2:
     case 3:
-    case 4: return numb + " поста";
-    default: return numb + " постов";
+    case 4: return ' найдено ' + numb + " поста";
+    default: return ' найдено ' + numb + " постов";
   }
 }
 
@@ -69,4 +69,10 @@ export const sliceComments = (data, count) => {
 export const slicePosts = (data, countFrom, count) => {
   const newComments = data.slice(countFrom, count);
   return newComments;
+}
+
+//фильтр для поиска карточек по тегу
+export const searchTags = (tags, query) => {
+  const cardsTagFound = tags.some(tag => tag.includes(query));
+  return cardsTagFound;
 }

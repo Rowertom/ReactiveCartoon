@@ -6,16 +6,16 @@ import { useSelector } from "react-redux";
 
 export const CatalogPage = ({search}) => {
 
-    const cards = useSelector(s => s.cards.posts);
+    const {posts} = useSelector(s => s.cards);
 
     return <>
         <Sort />
         {search && (
             <p className='countPosts'>
-                По запросу {search} найдено {cast(cards.length)}
+                По запросу {search} {cast(posts.length)}
             </p>
         )}
-        <CardList cards={cards}/>
+        <CardList cards={posts}/>
         <Paginate/>
     </>
 };

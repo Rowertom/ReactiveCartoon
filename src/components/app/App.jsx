@@ -7,18 +7,19 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { CatalogPage } from '../../pages/catalogPage/CatalogPage';
 import { PostPage } from '../../pages/postPage/PostPage';
 import { Page404 } from '../../pages/page404/Page404';
-import { Modal } from '../modal/Modal';
-import { Login } from '../auth/login/Login';
-import { Register } from '../auth/register/Register';
-import { ResetPass } from '../auth/resetPassword/ResetPassword';
 import { Favourites } from '../../pages/favorites/Favorites';
 import { useDispatch } from 'react-redux';
 import { fetchUser } from '../../storage/userSlice/userSlice';
-import { fetchCards } from '../../storage/cardsSlice/cardsSlice';
+import { currentTags, fetchCards, searchByTag } from '../../storage/cardsSlice/cardsSlice';
 import { fetchSearchCards } from '../../storage/cardsSlice/cardsSlice';
 import { ShowNotification } from '../notification/Notification';
 import { AdminPage } from '../../pages/adminPage/AdminPage';
 import { ProfilePage } from '../../pages/profilePage/profilePage';
+import { Authorization } from '../authorization/Authorization';
+import { Modal } from '../modal/Modal';
+import { ResetPass } from '../auth/resetPassword/ResetPassword';
+import { Register } from '../auth/register/Register';
+import { Login } from '../auth/login/Login';
 
 
 
@@ -36,13 +37,24 @@ function App() {
     dispatch(fetchSearchCards(query));
   };
 
+  //запрос поиска по тегу
+  const handleSearchByTag = (query) => {
+    dispatch(searchByTag(query));
+  };
+
   //хук задержки поиска
   const debounceValueInApp = useDebounce(search, 500);
 
   //задержка запроса на поиск
   useEffect(() => {
-    if (debounceValueInApp === undefined) return;
-    handleSearch(debounceValueInApp);
+    if (debounceValueInApp === undefined || debounceValueInApp === '') {
+      dispatch(currentTags());
+    } else if (debounceValueInApp.startsWith('#')) {
+      const tagAsk = debounceValueInApp.slice(1);
+      handleSearchByTag(tagAsk);
+    } else {
+      handleSearch(debounceValueInApp);
+    }
   }, [debounceValueInApp]);
 
   //получение данных юзера а потом получение постов
@@ -61,7 +73,7 @@ function App() {
 
   return (
     <>
-    <ShowNotification/>
+      <ShowNotification />
       <header className='container'>
         <Header
           setShowModal={setShowModal}
@@ -72,46 +84,20 @@ function App() {
       </header>
       {isAuthentificated ?
         <main className='container main'>
-
           <Routes>
             <Route path='/' element={<CatalogPage search={search} />}></Route>
             <Route path='post/:postId' element={<PostPage />}></Route>
             <Route path="favourites" element={<Favourites />}></Route>
             <Route path='profile' element={<ProfilePage />}></Route>
             <Route path='*' element={<Page404 />}></Route>
-            <Route path='admin' element={<AdminPage/>}></Route>
-            <Route path='/login' element={
+            <Route path='admin' element={<AdminPage />}></Route>
+            <Route path='login' element={
               <Modal activeModal={activeModal} setShowModal={setShowModal}>
                 <Login setShowModal={setShowModal} />
               </Modal>
             }
             ></Route>
-            <Route path='/register' element={
-              <Modal activeModal={activeModal} setShowModal={setShowModal}>
-                <Register setShowModal={setShowModal} />
-              </Modal>
-            }
-            ></Route>
-            <Route
-              path="reset-password"
-              element={
-                <Modal activeModal={activeModal} setShowModal={setShowModal}>
-                  <ResetPass setShowModal={setShowModal} />
-                </Modal>
-              }
-            ></Route>
-          </Routes>
-        </main>
-        :
-        <div className='not__auth container main'>Пожалуйста, авторизуйтесь
-          <Routes>
-            <Route path='/login' element={
-              <Modal activeModal={activeModal} setShowModal={setShowModal}>
-                <Login setShowModal={setShowModal} />
-              </Modal>
-            }
-            ></Route>
-            <Route path='/register' element={
+            <Route path='register' element={
               <Modal activeModal={activeModal} setShowModal={setShowModal}>
                 <Register setShowModal={setShowModal} />
               </Modal>
@@ -124,6 +110,10 @@ function App() {
             }
             ></Route>
           </Routes>
+        </main>
+        :
+        <div className='not__auth container main'>Пожалуйста, авторизуйтесь
+          <Authorization activeModal={activeModal} setShowModal={setShowModal} />
         </div>}
       <footer className='container'>
         <Footer />

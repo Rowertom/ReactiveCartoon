@@ -1,6 +1,6 @@
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { filterCards, findLike, slicePosts, sortCards } from "../../utils/utils";
+import { filterCards, findLike, searchTags, slicePosts, sortCards } from "../../utils/utils";
 import { toast } from "react-toastify";
 
 
@@ -114,6 +114,7 @@ const isError = (action) => {
 const initialState = {
     data: [],
     posts: [],
+    cardsForSearch: [],
     total: 0,
     favourites: [],
     page: 1,
@@ -141,6 +142,19 @@ const cardsSlice = createSlice({
             state.end = (state.page - 1) * state.pageSize + state.pageSize;
             state.posts = slicePosts(state.data, state.begin, state.end);
         },
+        //поиск карточек по тегу
+        searchByTag: (state, action) => {
+            state.cardsForSearch = state.data.filter(card => searchTags(card.tags, action.payload));
+            state.posts = state.cardsForSearch;
+            state.total = state.cardsForSearch.length;
+            state.pageSize = state.cardsForSearch.length;
+        }, 
+        //отображение карточек без поиска
+        currentTags: (state, action) => {
+            state.total = state.data.length;
+            state.pageSize = 6;
+            state.posts = slicePosts(state.data, state.begin, state.end);
+        }
     },
     extraReducers: builder => {
         builder.addCase(fetchCards.pending, (state) => {
@@ -151,7 +165,7 @@ const cardsSlice = createSlice({
             const { cards, user } = action.payload
             state.data = filterCards(cards);
             state.total = state.data.length;
-            state.posts = slicePosts(state?.data, state.begin, state.end);
+            state.posts = slicePosts(state.data, state.begin, state.end);
             state.favourites = cards.filter((e) => findLike(e, user));
             state.loading = false;
         })
@@ -193,9 +207,10 @@ const cardsSlice = createSlice({
             state.posts = slicePosts(state.data, state.begin, state.end);
         })
         builder.addCase(fetchSearchCards.fulfilled, (state, action) => {
-            state.data = filterCards(action.payload);
-            state.total = state.data.length;
-            state.posts = slicePosts(state.data, state.begin, state.end);
+            state.cardsForSearch = filterCards(action.payload);
+            state.total = state.cardsForSearch.length;
+            state.posts = state.cardsForSearch;
+            state.pageSize = state.cardsForSearch.length;
             state.loading = false;
         })
         builder.addCase(isError, (state, action) => {
@@ -206,6 +221,6 @@ const cardsSlice = createSlice({
     }
 })
 
-export const { sortedCards, setPage } = cardsSlice.actions;
+export const { sortedCards, setPage, searchByTag, currentTags } = cardsSlice.actions;
 
 export default cardsSlice.reducer;
