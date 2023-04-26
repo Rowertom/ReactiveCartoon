@@ -23,8 +23,8 @@ export const Card = ({ date, image, title, text, author, posts }) => {
     dispatch(fetchChangePostLike(posts));
   }
 
-   //функция отказа от удаления
-   const handleCloseNo = () => {
+  //функция отказа от удаления
+  const handleCloseNo = () => {
     setOpen(false);
   }
 
@@ -64,7 +64,9 @@ export const Card = ({ date, image, title, text, author, posts }) => {
       </div>
       <div className='card__data'>
         <div>
-          <img src={image} alt='card__image' className='card__image' />
+          <Link to={`/post/${posts._id}`} className='link'>
+            <img src={image} alt='card__image' className='card__image' />
+          </Link>
         </div>
         <div className='card__data__tag'>
           {posts.tags?.map((e) => (<span key={e} className='post__data__tag__span'>{e}</span>))}
