@@ -12,9 +12,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as Login } from '../../assets/images/loginh.svg';
 import { Modal } from '../modal/Modal';
 import { CreatePost } from '../createPost/CreatPost';
+import { useDispatch } from 'react-redux';
+import { setShowModal } from '../../storage/modalSlice/modalSlice';
 
 export const Header = ({
-    setShowModal,
     isAuthentificated,
     setIsAuthentificated,
     setSearch
@@ -22,6 +23,7 @@ export const Header = ({
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [createPostModal, setCreatePostModal] = React.useState(false);
+    const dispatch = useDispatch();
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -54,10 +56,15 @@ export const Header = ({
     }
 
     //переход на страницу админа
-    const handleAdmin = ()=>{
+    const handleAdmin = () => {
         navigate('/admin')
         handleClose()
-       }
+    }
+
+    //открытие модального окна
+    const handleModal = (query) => {
+        dispatch(setShowModal(query));
+    }
 
     return (
         <>
@@ -67,13 +74,16 @@ export const Header = ({
                         <Logo />
                         {isAuthentificated && <Search setSearch={setSearch} />}
                         <div className='header__create'>
-                            {isAuthentificated && <button className='btn_header' onClick={() => setCreatePostModal(true)}>СОЗДАТЬ ПОСТ</button>}
-                            {createPostModal && <Modal activeModal={createPostModal} setShowModal={setCreatePostModal}>
+                            {isAuthentificated && <button className='btn_header' onClick={() => {
+                                handleModal(true);
+                                setCreatePostModal(true)}
+                                }>СОЗДАТЬ ПОСТ</button>}
+                            {createPostModal && <Modal>
                                 <CreatePost setCreatePostModal={setCreatePostModal} />
                             </Modal>}
                         </div>
                     </div>
-                    {!isAuthentificated ? <Link to={"/login"} className="header_link" onClick={() => setShowModal(true)}>
+                    {!isAuthentificated ? <Link to={"/login"} className="header_link" onClick={() => handleModal(true)}>
                         <Login /> Вход
                     </Link> :
                         <div className='header__rait'>

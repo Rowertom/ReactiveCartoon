@@ -43,7 +43,6 @@ class Api {
     }).then(onResponse);
   }
 
-
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       ...this._freshHeaders(),
@@ -105,6 +104,13 @@ class Api {
 
   getCommentsPost(postId) {
     return fetch(`${this._baseUrl}/posts/comments/${postId}`, {
+      ...this._freshHeaders(),
+      method: "GET",
+    }).then((res) => onResponse(res));
+  }
+
+  getAllComments() {
+    return fetch(`${this._baseUrl}/posts/comments`, {
       ...this._freshHeaders(),
       method: "GET",
     }).then((res) => onResponse(res));

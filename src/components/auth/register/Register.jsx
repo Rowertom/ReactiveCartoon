@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { authApi } from "../../../utils/auth.Api";
@@ -6,10 +5,17 @@ import { pattern } from "../../../utils/validations";
 import { BaseButton } from "../../baseButton/BaseButton"
 import { Form } from "../../form/Form"
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setShowModal } from "../../../storage/modalSlice/modalSlice";
 
-export const Register = ({ setShowModal }) => {
-    const { register, handleSubmit, formState: { errors } } = useForm({ mode: "onSubmit" });
+export const Register = () => {
+    const { register,
+        handleSubmit,
+        formState: { errors }
+    } = useForm({ mode: "onSubmit" });
+
     const navigate = useNavigate()
+    const dispatch = useDispatch();
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -35,12 +41,11 @@ export const Register = ({ setShowModal }) => {
         pattern: pattern,
     })
 
-    useEffect(() => {
-        setShowModal(true)
-    }, [setShowModal])
+    dispatch(setShowModal(true));
 
     return (
         <>
+            <button className='post_btn btn__type__primary' onClick={() => navigate(-1)}>{'< '}Назад</button>
             <Form submitForm={handleSubmit(sendData)} title={'Регистрация'}>
                 <div className="auth_controls">
                     <input type='text'

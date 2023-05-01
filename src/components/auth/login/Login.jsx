@@ -4,18 +4,20 @@ import '../style.css';
 import { BaseButton } from "../../baseButton/BaseButton";
 import { useNavigate } from "react-router-dom";
 import { pattern } from "../../../utils/validations";
-import { useEffect } from "react";
 import { authApi } from "../../../utils/auth.Api";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setShowModal } from "../../../storage/modalSlice/modalSlice";
 
 
-export const Login = ({ setShowModal }) => {
+export const Login = () => {
     const { register,
         handleSubmit,
         formState: { errors }
     } = useForm({ mode: "onSubmit" });
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -30,9 +32,7 @@ export const Login = ({ setShowModal }) => {
         pattern,
     })
 
-    useEffect(() => {
-        setShowModal(true)
-    }, [setShowModal])
+    dispatch(setShowModal(true));
 
     const sendData = async (data) => {
         try {
@@ -44,7 +44,6 @@ export const Login = ({ setShowModal }) => {
             toast.error('Неправильные логин и пароль')
         }
     }
-
 
     return (
         <>

@@ -4,31 +4,25 @@ import { Login } from "../auth/login/Login"
 import { Register } from "../auth/register/Register"
 import { ResetPass } from "../auth/resetPassword/ResetPassword"
 
-export const Authorization = ({ activeModal, setShowModal }) => {
+export const Authorization = () => {
 
     return (
-        // <>
-            <Routes>
-                <Route path='login' element={
-                    <Modal activeModal={activeModal} setShowModal={setShowModal}>
-                        <Login setShowModal={setShowModal} />
-                    </Modal>
-                }
-                ></Route>
-                <Route path='register' element={
-                    <Modal activeModal={activeModal} setShowModal={setShowModal}>
-                        <Register setShowModal={setShowModal} />
-                    </Modal>
-                }
-                ></Route>
-                <Route path="reset-password" element={
-                    <Modal activeModal={activeModal} setShowModal={setShowModal}>
-                        <ResetPass setShowModal={setShowModal} />
-                    </Modal>
-                }
-                ></Route>
-            </Routes>
-        // </>
+        <Routes>
+            <Route path='login' element={
+                <Modal>
+                    <Login />
+                </Modal>
+            }></Route>
+            <Route path='register' element={
+                <Modal>
+                    <Register />
+                </Modal>
+            }></Route>
+            <Route path="reset-password" element={
+                <Modal>
+                    <ResetPass />
+                </Modal>
+            }></Route>
+        </Routes>
     )
-
 }

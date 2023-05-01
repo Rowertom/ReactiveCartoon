@@ -20,6 +20,8 @@ import { Modal } from '../modal/Modal';
 import { ResetPass } from '../auth/resetPassword/ResetPassword';
 import { Register } from '../auth/register/Register';
 import { Login } from '../auth/login/Login';
+import { CommentPage } from '../../pages/commentPage/CommentPage';
+import { fetchAllComments } from '../../storage/allCommentsSlice/allCommentsSlice';
 
 
 
@@ -27,7 +29,6 @@ function App() {
 
   const [search, setSearch] = useState('');
   const [isAuthentificated, setIsAuthentificated] = useState(false)
-  const [activeModal, setShowModal] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -57,10 +58,10 @@ function App() {
     }
   }, [debounceValueInApp]);
 
-  //получение данных юзера а потом получение постов
+  //получение данных юзера а потом получение постов а потом все комментариев
   useEffect(() => {
     if (!isAuthentificated) return;
-    dispatch(fetchUser()).then(() => dispatch(fetchCards()));
+    dispatch(fetchUser()).then(() => dispatch(fetchCards()).then(() =>dispatch(fetchAllComments())));
   }, [isAuthentificated, dispatch]);
 
   //подтверждение аутентификации
@@ -76,7 +77,6 @@ function App() {
       <ShowNotification />
       <header className='container'>
         <Header
-          setShowModal={setShowModal}
           isAuthentificated={isAuthentificated}
           setIsAuthentificated={setIsAuthentificated}
           setSearch={setSearch}
@@ -91,29 +91,15 @@ function App() {
             <Route path='profile' element={<ProfilePage />}></Route>
             <Route path='*' element={<Page404 />}></Route>
             <Route path='admin' element={<AdminPage />}></Route>
-            <Route path='login' element={
-              <Modal activeModal={activeModal} setShowModal={setShowModal}>
-                <Login setShowModal={setShowModal} />
-              </Modal>
-            }
-            ></Route>
-            <Route path='register' element={
-              <Modal activeModal={activeModal} setShowModal={setShowModal}>
-                <Register setShowModal={setShowModal} />
-              </Modal>
-            }
-            ></Route>
-            <Route path="reset-password" element={
-              <Modal activeModal={activeModal} setShowModal={setShowModal}>
-                <ResetPass setShowModal={setShowModal} />
-              </Modal>
-            }
-            ></Route>
+            <Route path='comments' element={<CommentPage/>}></Route>
+            <Route path='login' element={<Modal><Login/></Modal>}></Route>
+            <Route path='register' element={<Modal><Register/></Modal>}></Route>
+            <Route path="reset-password" element={<Modal><ResetPass /></Modal>}></Route>
           </Routes>
         </main>
         :
         <div className='not__auth container main'>Пожалуйста, авторизуйтесь
-          <Authorization activeModal={activeModal} setShowModal={setShowModal} />
+          <Authorization/>
         </div>}
       <footer className='container'>
         <Footer />

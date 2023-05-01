@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { authApi } from "../../../utils/auth.Api";
@@ -6,10 +6,19 @@ import { pattern } from "../../../utils/validations";
 import { BaseButton } from "../../baseButton/BaseButton"
 import { Form } from "../../form/Form"
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setShowModal } from "../../../storage/modalSlice/modalSlice";
 
-export const ResetPass = ({ setShowModal }) => {
+export const ResetPass = () => {
+
     const [tokenResp, setTokenResp] = useState(null)
-    const { register, handleSubmit, formState: { errors } } = useForm({ mode: "onSubmit" });
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const { register, 
+        handleSubmit, 
+        formState: { errors } 
+    } = useForm({ mode: "onSubmit" });
 
     const emailRegistr = register('email', {
         required: 'Email обязателен',
@@ -18,7 +27,7 @@ export const ResetPass = ({ setShowModal }) => {
     const sendData = async (data) => {
         if (!tokenResp) {
             try {
-                const res = await authApi.resetPass(data);
+                await authApi.resetPass(data);
                 setTokenResp(true);
                 toast.success('Ссылка отправлена на почту')
             } catch (error) {
@@ -41,14 +50,11 @@ export const ResetPass = ({ setShowModal }) => {
         pattern: pattern,
     })
 
-    useEffect(() => {
-        setShowModal(true);
-    }, [setShowModal])
-
-    const navigate = useNavigate();
+     dispatch(setShowModal(true));
 
     return (
         <>
+            <button className='post_btn btn__type__primary' onClick={() => navigate(-1)}>{'< '}Назад</button>
             <Form submitForm={handleSubmit(sendData)} title={'Восстановление пароля'}>
                 <div className="auth_controls">
                     <span className="auth__info">Для получения временного пароля необходимо ввести email, указанный при регистрации.</span>
@@ -77,8 +83,6 @@ export const ResetPass = ({ setShowModal }) => {
                         {errors?.password && (
                             <span className="auth_warning">{errors.password?.message}</span>)}
                     </>}
-
-                    <span className="auth__info auth__back" onClick={() => navigate(-1)}>{'<'}Назад</span>
                     <span className="auth__info">Срок действия временного пароля 24 ч.</span>
                     <div className="auth__actions">
                         <BaseButton type="submit" color={'blue'}>

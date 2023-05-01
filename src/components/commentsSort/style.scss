@@ -1,0 +1,19 @@
+
+.sort__comments{
+    background-color: rgba(41, 5, 245, 0.7);
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+
+    &__count{
+        padding: 0px 40px;
+    }
+
+    &__data{
+        display: flex;
+        gap: 30px;
+        color: white;
+    }
+}

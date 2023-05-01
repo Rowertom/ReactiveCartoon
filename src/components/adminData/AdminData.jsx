@@ -143,6 +143,11 @@ export const AdminData = () => {
     <div className='admin'>
       <h1>Статистика</h1>
     </div>
+    <div>
+      <h1>Уникальных постов: {cards.length}</h1>
+      <h1>Посетителей:</h1>
+      <div class="elfsight-app-8b53ed14-ab36-46b8-ae93-41bd94d50f51"></div>
+    </div>
     {/* диаграммa */}
     <div className='diagram' id='chartsId' />
     {/* таблица */}

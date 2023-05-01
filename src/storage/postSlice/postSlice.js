@@ -52,14 +52,15 @@ export const fetchDeleteComment = createAsyncThunk(
         }
     });
 
-    const isError = (action) => {
-        return action.type.endsWith('rejected');
-    };
+const isError = (action) => {
+    return action.type.endsWith('rejected');
+};
 
 //Объявление изначального стейта поста
 const initialState = {
     post: [],
     comments: [],
+    allComments: [],
     countComments: 2,
     loading: false,
     error: null,
@@ -86,7 +87,7 @@ const postSlice = createSlice({
             state.post = action.payload;
         },
         //action комментариев больше
-        showMoreComments: (state, action) =>{
+        showMoreComments: (state, action) => {
             state.countComments = state.countComments + 2;
             state.comments = [...sliceComments(sortComments(state.post.comments), state.countComments)]
         },
