@@ -4,6 +4,7 @@
     border: 1px solid red;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 20px;
+    text-decoration: none;
     &:hover{
         box-shadow: 5px 5px 10px red;
     }
@@ -25,5 +26,6 @@
         align-items: flex-start;
         justify-content: center;
         gap: 20px;
+        text-decoration: none;
     }
 }

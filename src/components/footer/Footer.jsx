@@ -7,7 +7,7 @@ export const Footer = () => {
       <div className='contain'>
         <div className='footer__links footer__group'>
           <Link to={'/comments'} >Все отзывы</ Link>
-          <a href='/'>Контакты</a>
+          <Link to={'/back'}>Обратная связь</Link>
           ©2023 Made by Alexey Martynenko && Lena Farhutdinova
         </div>
       </div>

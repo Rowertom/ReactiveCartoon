@@ -22,6 +22,7 @@ import { Register } from '../auth/register/Register';
 import { Login } from '../auth/login/Login';
 import { CommentPage } from '../../pages/commentPage/CommentPage';
 import { fetchAllComments } from '../../storage/allCommentsSlice/allCommentsSlice';
+import { BackConnect } from '../backConnect/BackConnect';
 
 
 
@@ -90,6 +91,7 @@ function App() {
             <Route path="favourites" element={<Favourites />}></Route>
             <Route path='profile' element={<ProfilePage />}></Route>
             <Route path='*' element={<Page404 />}></Route>
+            <Route path='back' element={<BackConnect/>}></Route>
             <Route path='admin' element={<AdminPage />}></Route>
             <Route path='comments' element={<CommentPage/>}></Route>
             <Route path='login' element={<Modal><Login/></Modal>}></Route>
